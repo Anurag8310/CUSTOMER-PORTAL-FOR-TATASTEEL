@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tata Steel Customer Portal | Official Commercial Self-Service</title>
+  
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Pure Rotating Tata Oval Logo Page Buffering Overlay (Using logo.png) -->
+  <div id="page-loader" class="page-loader-overlay">
+    <div class="tata-loading-box">
+      <img src="images/logo.png" alt="Loading..." class="tata-spinner-logo">
+    </div>
+  </div>
+
+  <!-- Fullscreen Dedicated Customer Login Screen -->
+  <div id="login-screen" style="display: flex;">
+    <div id="login-box-container"></div>
+  </div>
+
+  <!-- Main Portal Shell (Rendered post-login) -->
+  <div id="app-shell" style="display: none;">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand-header">
+        <div class="sidebar-logo-box">
+          <img src="images/tata-steel-seeklogo.png" alt="Tata Steel" class="tata-wordmark-md">
+        </div>
+      </div>
+
+      <ul class="nav-menu">
+        <li>
+          <a class="nav-item active" data-view="dashboard">
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-view="orders">
+            <span>My Orders & RFQs</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-view="tracking">
+            <span>Live Dispatch Tracker</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-view="calculator">
+            <span>Steel Price Calculator</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-view="catalog">
+            <span>Product Specifications</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-view="mtc">
+            <span>MTC Certificates</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-view="greensteel">
+            <span>GreenSteel Zeromet</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-view="contact">
+            <span>Official Sales Contact</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-view="account-logs">
+            <span>Account Security Logs</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- User Active Badge & Logout -->
+      <div class="nav-user-box">
+        <div class="mb-2">
+          <div id="nav-user-name" class="font-bold text-white text-xs truncate">Customer Account</div>
+          <div id="nav-user-company" class="text-3xs text-muted truncate">Company Name</div>
+          <div id="nav-user-code" class="text-3xs font-mono text-cyan truncate">Code: TS-CUST-8810</div>
+        </div>
+        <button class="btn btn-xs btn-danger btn-block" onclick="window.app.handleLogout()">
+          Log Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Top Navigation Header -->
+      <header class="top-header">
+        <div class="flex items-center gap-3">
+          <div class="header-logo-box">
+            <img src="images/tata-steel-seeklogo.png" alt="Tata Steel" class="tata-wordmark-sm">
+          </div>
+          <span class="badge badge-success text-xs">Tata Steel Works: Operational</span>
+          <span class="text-xs text-muted font-mono hidden md:inline">Jamshedpur • Kalinganagar • Meramandali</span>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <!-- Active Account Switcher -->
+          <div class="flex items-center gap-2">
+            <span class="text-xs text-muted">Account:</span>
+            <select class="form-select btn-xs py-1" style="width: auto;" onchange="window.tataAuth.login(this.value, 'pass'); window.app.renderCurrentView();">
+              <option value="usr_01">L&T Construction (Infra)</option>
+              <option value="usr_02">Tata Motors (Auto OEM)</option>
+            </select>
+          </div>
+
+          <!-- Explicit Logout Button -->
+          <button class="btn btn-xs btn-danger" onclick="window.app.handleLogout()">
+            Log Out
+          </button>
+        </div>
+      </header>
+
+      <!-- View Containers -->
+      <div class="view-body">
+        
+        <div id="view-dashboard" class="view-container">
+          <div id="dashboard-view-container"></div>
+        </div>
+
+        <div id="view-orders" class="view-container" style="display: none;">
+          <div id="orders-view-container"></div>
+        </div>
+
+        <div id="view-tracking" class="view-container" style="display: none;">
+          <div id="dispatch-view-container"></div>
+        </div>
+
+        <div id="view-calculator" class="view-container" style="display: none;">
+          <div id="calculator-view-container"></div>
+        </div>
+
+        <div id="view-catalog" class="view-container" style="display: none;">
+          <div id="catalog-view-container"></div>
+        </div>
+
+        <div id="view-mtc" class="view-container" style="display: none;">
+          <div id="mtc-view-container"></div>
+        </div>
+
+        <div id="view-greensteel" class="view-container" style="display: none;">
+          <div id="greensteel-view-container"></div>
+        </div>
+
+        <div id="view-contact" class="view-container" style="display: none;">
+          <div id="contact-view-container"></div>
+        </div>
+
+        <div id="view-account-logs" class="view-container" style="display: none;">
+          <div id="account-logs-view-container"></div>
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- JavaScript Modules -->
+  <script src="js/data.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/tracking.js"></script>
+  <script src="js/calculator.js"></script>
+  <script src="js/mtc.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
